@@ -10,7 +10,6 @@ const rl = createInterface({
 });
 
 function displayMenu() {
-  console.log(chalk.bgBlue.bold("answer"));
   console.log(chalk.yellow.bold("TO DO App"));
   console.log(chalk.blueBright("Menu de Opciones:"));
   console.log("1.Agregar Tarea");
@@ -19,16 +18,35 @@ function displayMenu() {
   console.log("4.Salir");
 }
 
-displayMenu();
+function addTask() {
+  rl.question("Escribe la tarea que deseas agregar:", (task) => {
+    tasks.push({ task, completed: false });
+    console.log(
+      chalk.green.bold(`La Tarea "${task}" ha sido agregada con exito`)
+    );
+    displayMenu();
+    chooseOption();
+    //console.log(tasks);
+  });
+}
 
-function chooseoption() {
-  rl.question("Digita el numero de tu Opcion", (choice) => {
+function ListsTasks() {
+  console.log(chalk.red.bold("/n Tareas/n"));
+  tasks.forEach((task, index) => {
+    let status = task.completed ? "Co" : "In";
+    console.log(chalk.bgBlueBright(`${index + 1}.${status} -${task.task}`));
+  });
+  chooseOption();
+}
+
+function chooseOption() {
+  rl.question("Digita el numero de tu Opcion:", (choice) => {
     switch (choice) {
       case "1":
-        console.log("Crear Tarea");
+        addTask();
         break;
       case "2":
-        console.log("Listar Tarea");
+        ListsTasks();
         break;
       case "3":
         console.log("Completar Tarea");
@@ -45,3 +63,6 @@ function chooseoption() {
     }
   });
 }
+
+displayMenu();
+chooseOption();
