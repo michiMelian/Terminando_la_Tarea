@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon app.js",
-    "start": "node app.js"
+    "start": "node app.js",
+    "dev-file": "nodemon app-with-file.js",
+    "start-file": "node app-with-file.js"
   },
   "keywords": [],
   "author": "Michi",
